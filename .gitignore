@@ -1,0 +1,7 @@
+/**/vendor
+/**/node_modules
+/**/.env
+firebase/firebase_key.json
+chokidar/data/
+aws/lamdacatch.json
+/**/.DS_Store

@@ -1,0 +1,13 @@
+{
+    "name": "matsumoto/firebase",
+    "authors": [
+        {
+            "name": "Norio",
+            "email": "umanari145@gmail.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^3.6",
+        "kreait/firebase-php": "^4.32"
+    }
+}

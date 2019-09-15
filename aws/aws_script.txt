@@ -1,0 +1,137 @@
+
+*登録されているregionと違う場合は、S3以外は--regionが必要。(S3はregionがないため不要)*
+
+## SQS
+キューの登録
+https://cloudautomator.com/blog/2014/07/31/awscli-sqs-trigger/
+
+登録
+```
+aws sqs send-message --queue-url QueueUrl \
+--message-body "test message nagabuchi" \
+```
+
+受信
+```
+aws sqs receive-message --queue-url QueueUrl
+```
+
+削除
+```
+aws sqs delete-message --queue-url QueueUrl
+--receipt-handle
+```
+
+## SNS
+```
+aws sns publish \
+        --topic-arn "arn:aws:sns:リージョン番号:sns番号:sns名" \
+        --message '本日は晴天なり' \
+        --subject "test"
+```
+## SES
+```
+aws ses send-email --destination "ToAddresses=送信先メールアドレス" \
+ --message "Subject={Data=TEST,Charset=utf8},Body={Text={Data='ホゲホゲ',Charset=utf8}}" \
+ --source-arn (AWSのarn) \
+ --from "送信元メールアドレス" --region us-east-1
+```
+## S3
+s3コマンド
+```
+aws s3 cp あげたいファイル s3://bucket名/フォルダパス/ ←スラッシュ忘れない
+aws s3 ls s3://バケット名/nogizaka/ | awk ‘{print $1}’
+aws s3 ls s3://バケット名/nogizaka/ | grep sample
+```
+
+## EC2起動コマンド
+### 起動コマンド
+```
+aws ec2 start-instances --instance-ids <instance_id>
+```
+
+レスポンス
+```
+{
+    "StartingInstances": [
+        {
+            "CurrentState": {
+                "Code": 0,
+                "Name": "pending"
+            },
+            "InstanceId": "ここにインスタンスIDが入る",
+            "PreviousState": {
+                "Code": 80,
+                "Name": "stopped"
+            }
+        }
+    ]
+}
+```
+
+### 停止コマンド
+```
+aws ec2 stop-instances --instance-ids <instance_id>
+```
+
+レスポンス
+
+```
+{
+    "StoppingInstances": [
+        {
+            "CurrentState": {
+                "Code": 64,
+                "Name": "stopping"
+            },
+            "InstanceId": "インスタンスID",
+            "PreviousState": {
+                "Code": 16,
+                "Name": "running"
+            }
+        }
+    ]
+}
+
+
+```
+
+### status確認
+```
+aws ec2 describe-instance-status --instance-ids  <instance_id>
+```
+
+レスポンス
+```
+{
+    "InstanceStatuses": [
+        {
+            "AvailabilityZone": "リージョン",
+            "InstanceId": "インスタンスID",
+            "InstanceState": {
+                "Code": 16,
+                "Name": "running"
+            },
+            "InstanceStatus": {
+                "Details": [
+                    {
+                        "Name": "reachability",
+                        "Status": "initializing"
+                    }
+                ],
+                "Status": "initializing"
+            },
+            "SystemStatus": {
+                "Details": [
+                    {
+                        "Name": "reachability",
+                        "Status": "initializing"
+                    }
+                ],
+                "Status": "initializing"
+            }
+        }
+    ]
+}
+
+```
