@@ -85,3 +85,6 @@ aws s3 ls s3://バケット名/フォルダ名/ | grep sample
 aws s3 cp s3://バケット名/ファイルパス ./
 
 ## firebase
+
+- firebase/crud.php 登録 API
+- firebase/crud_test.php APIテスト
