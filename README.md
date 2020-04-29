@@ -59,6 +59,11 @@ aws sqs receive-message --queue-url QueueUrl
 aws sqs delete-message --queue-url QueueUrl
 --receipt-handle
 
+### Lambda
+サーバーレスサービス
+- メール受信後、S3に保存
+- ファイル操作など
+
 ## SNS
 aws sns publish \
         --topic-arn "arn:aws:sns:リージョン番号:sns番号:sns名" \
