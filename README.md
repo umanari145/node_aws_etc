@@ -8,6 +8,10 @@ chokidarを使い、dataディレクトリに変更があった時にconsole.log
 
 ## awsのスクリプト
 - aws/login_ec2.sh タグ取得時のEC2へのログイン
+- aws/controller_ec2.sh ec2の起動・停止
+./controller_ec2 start 停止
+./controller_ec2 stop 停止
+参考:https://gist.github.com/wata727/9849b639551c0c176ba4
 - aws/send_sqs.js キューメッセージの作成
 - aws/send_sqs.js キューメッセージの作成
 - aws/receive_sql.js メッセージの受信と削除
