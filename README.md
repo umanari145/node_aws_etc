@@ -7,7 +7,7 @@ chokidar/app.js<br>
 chokidarを使い、dataディレクトリに変更があった時にconsole.logに出力
 
 ## awsのスクリプト
-
+- aws/login_ec2.sh タグ取得時のEC2へのログイン
 - aws/send_sqs.js キューメッセージの作成
 - aws/send_sqs.js キューメッセージの作成
 - aws/receive_sql.js メッセージの受信と削除
@@ -74,6 +74,7 @@ aws ec2 describe-instances \
 ```
 
 https://dev.classmethod.jp/articles/awscli-tips-ec2-start-stop/
+
 
 
 
