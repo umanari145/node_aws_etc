@@ -9,7 +9,7 @@ let ses = new AWS.SES();
 
 let params = {
   Destination: {
-    ToAddresses:['matsu@3films.com']
+    ToAddresses:['hogehoge145@kourin.lolipop.jp']
   },
   Message: {
     Body:{
@@ -23,7 +23,7 @@ let params = {
       Charset: 'utf-8'
     }
   },
-  Source: 'matsumoto@dt30.net'
+  Source: 'umanari145@gmail.com'
 };
 
 

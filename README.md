@@ -17,6 +17,66 @@ chokidarを使い、dataディレクトリに変更があった時にconsole.log
 - aws/aws_lambda.py lambdaでのメール転送処理
 - aws/aws_python.py pythonでのs3処理
 
+### EC2 頻出コマンド
+
+ec2起動・停止
+```
+#起動
+aws ec2 start-instances --instance-ids ${instance-id}
+
+#停止
+aws ec2 stop-instances --instance-ids ${instance-id}
+```
+
+https://dev.classmethod.jp/articles/awscli-tips-ec2-start-stop/
+
+
+情報取得(JSONでレスポンスあり)
+```
+#help
+aws ec2 describe-tags help
+#単一のインスタンス情報取得
+aws ec2 describe-instances --instance-ids ${instance-id}
+#複数取得
+aws ec2 describe-instances --instance-ids ${instance-id} ${instance-id2} ${instance-id3}
+#filter
+#(例 key=Name, Value=WebServerというタグをスクリーニングしたい場合)
+aws ec2 describe-instances \
+    --filters "Name=tag-key,Values=Name" \
+              "Name=tag-value,Values=WebServer"
+下記のように書いても大丈夫
+aws ec2 describe-instances --filters "Name=tag:Name,Values=WebServer"
+```
+詳細
+https://dev.classmethod.jp/articles/aws-cli-filter-and-query-howto/
+
+jsonパーサーを使った抽出
+```
+#インスタンスIDのみ取得する場合
+aws ec2 describe-instances | jq '.Reservations[].Instances[].InstanceId'
+
+#プライベートIPアドレスのみ
+aws ec2 describe-instances | jq '.Reservations[].Instances[].PrivateIpAddress'
+
+#パブリックIPアドレス
+aws ec2 describe-instances | jq '.Reservations[].Instances[].PublicIpAddress'
+
+#インスタンスID、インスタンスタイプ、プライベートIPを取得する場合
+aws ec2 describe-instances | jq '.Reservations[].Instances[] | {InstanceId, InstanceType, PrivateIpAddress}'
+
+#filter抽出 + IPアドレス
+aws ec2 describe-instances \
+    --filters "Name=tag-key,Values=Name" \
+              "Name=tag-value,Values=WebServer" \
+| jq '.Reservations[].Instances[].PublicIpAddress'
+
+
+```
+
+https://dev.classmethod.jp/articles/awscli-tips-ec2-start-stop/
+
+
+
 
 ### SES
 aws/ses.js<br>
