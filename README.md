@@ -83,8 +83,9 @@ https://dev.classmethod.jp/articles/awscli-tips-ec2-start-stop/
 
 https://qiita.com/Esfahan/items/2ddc8d481afd012da357#aws-ecr%E3%81%ABdocker-image%E3%82%92%E7%99%BB%E9%8C%B2
 
-<br>
+
 ```
+
 #リポジトリ作成(この段階でまだimageがあげられているわけではない)
 aws ecr create-repository --repository-name リポジトリ名
 #コンソールに行くと下記のようなスクリプトが出てくるのでコピペ
