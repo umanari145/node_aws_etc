@@ -135,3 +135,26 @@ aws ec2 describe-instance-status --instance-ids  <instance_id>
 }
 
 ```
+
+## ECR
+
+https://qiita.com/Esfahan/items/2ddc8d481afd012da357#aws-ecr%E3%81%ABdocker-image%E3%82%92%E7%99%BB%E9%8C%B2
+
+<br>
+```
+#リポジトリ作成(この段階でまだimageがあげられているわけではない)
+aws ecr create-repository --repository-name リポジトリ名
+#コンソールに行くと下記のようなスクリプトが出てくるのでコピペ
+aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin XXXXXXXXXX.dkr.ecr.us-east-1.amazonaws.com
+#Login Succeededが表示される
+
+#タグ付け&登録
+docker tag (dockerイメージ):タグ \
+   ecrURL/リポジトリ:タグ
+例
+docker tag redmine_redmine:latest \
+   XXXXXXXXXXXX.dkr.ecr.us-east-1.amazonaws.com/redmine:latest
+
+#プッシュ
+docker push XXXXXXXXXXXXXXXXX.dkr.ecr.us-east-1.amazonaws.com/redmine:latest
+```
