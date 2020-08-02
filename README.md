@@ -103,7 +103,29 @@ docker tag redmine_redmine:latest \
 docker push XXXXXXXXXXXXXXXXX.dkr.ecr.us-east-1.amazonaws.com/redmine:latest
 ```
 
+## ecs-cli インストール
+```
+brew install amazon-ecs-cli
+```
 
+### クラスター名
+クラスター作成
+```
+ecs-cli configure --region 地域 
+--access-key XXXXXXXX \
+--secret-key XXXXXXXX \
+--cluster ecs-cli-test(クラスター名)
+```
+クラスタ起動
+```
+ecs-cli up  \
+--capability-iam --size 2 --instance-type t2.micro
+```
+
+タスク定義
+```
+ecs-cli compose -f docker-compose.yml up
+```
 
 ### SES
 aws/ses.js<br>
