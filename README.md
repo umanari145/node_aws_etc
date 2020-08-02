@@ -103,7 +103,9 @@ docker tag redmine_redmine:latest \
 docker push XXXXXXXXXXXXXXXXX.dkr.ecr.us-east-1.amazonaws.com/redmine:latest
 ```
 
-## ecs-cli インストール
+## ECS
+
+ecs-cli インストール
 ```
 brew install amazon-ecs-cli
 ```
@@ -148,7 +150,7 @@ Cluster creation succeeded.
 ```
 ecs-cli compose -f docker-compose.yml up
 
-docker-composeのimageがないとダメ
+docker-composeのimageがないとダメ ECRにあげた後、imageにECRのURLを記入
 
 WARN[0000] Skipping unsupported YAML option for service...  option name=build service name=redmine
 INFO[0002] Using ECS task definition                     TaskDefinition="redmine:4"
