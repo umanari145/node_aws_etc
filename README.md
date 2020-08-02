@@ -108,7 +108,7 @@ docker push XXXXXXXXXXXXXXXXX.dkr.ecr.us-east-1.amazonaws.com/redmine:latest
 brew install amazon-ecs-cli
 ```
 
-### クラスター名
+### クラスター
 クラスター作成
 ```
 ecs-cli configure --region 地域 
@@ -116,15 +116,58 @@ ecs-cli configure --region 地域
 --secret-key XXXXXXXX \
 --cluster ecs-cli-test(クラスター名)
 ```
-クラスタ起動
+結果
+
+```
+INFO[0000] Saved ECS CLI cluster configuration default. 
+```
+
+クラスタ起動(オプションはシンプル)
 ```
 ecs-cli up  \
 --capability-iam --size 2 --instance-type t2.micro
+```
+結果(3〜5分かかる)
+```
+WARN[0000] You will not be able to SSH into your EC2 instances without a key pair. 
+INFO[0003] Using recommended Amazon Linux 2 AMI with ECS Agent 1.42.0 and Docker version 19.03.6-ce 
+INFO[0004] Created cluster                               cluster=redmine2058 region=us-east-1
+INFO[0006] Waiting for your cluster resources to be created... 
+INFO[0007] Cloudformation stack status                   stackStatus=CREATE_IN_PROGRESS
+INFO[0070] Cloudformation stack status                   stackStatus=CREATE_IN_PROGRESS
+INFO[0132] Cloudformation stack status                   stackStatus=CREATE_IN_PROGRESS
+VPC created: XXXXXXXXXXXXXXXXXXXXXXX
+Security Group created: XXXXXXXXXXXXX
+Subnet created: subnet-XXXXXXXXXX
+Subnet created: subnet-XXXXXXXXXX
+Cluster creation succeeded.
+
 ```
 
 タスク定義
 ```
 ecs-cli compose -f docker-compose.yml up
+
+docker-composeのimageがないとダメ
+
+WARN[0000] Skipping unsupported YAML option for service...  option name=build service name=redmine
+INFO[0002] Using ECS task definition                     TaskDefinition="redmine:4"
+INFO[0002] Starting container...                         container=xxxxxxxxxx/redmine
+INFO[0002] Describe ECS container status                 container=xxxxxxxxxx/redmine desiredStatus=RUNNING lastStatus=PENDING taskDefinition="redmine:4"
+INFO[0016] Describe ECS container status                 container=xxxxxxxxxx/redmine desiredStatus=RUNNING lastStatus=PENDING taskDefinition="redmine:4"
+INFO[0022] Started container...                          container=xxxxxxxxxx/redmine desiredStatus=RUNNING lastStatus=RUNNING taskDefinition="redmine:4"
+
+```
+タスクストップ
+ecs-cli compose -f docker-compose.yml down
+
+現状確認
+ecs-cli ps
+
+```
+Name                                          State    Ports                        TaskDefinition  Health
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX/redmine  RUNNING  XX.XX.XX.XX:80->3000/tcp  redmine:4       UNKNOWN
+
 ```
 
 ### SES
