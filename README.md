@@ -48,9 +48,9 @@ aws ec2 attach-internet-gateway \
 ルートテーブルの編集(VPC作成時に自動的に作られるので、編集)
 ```
 aws ec2 create-route \
- --route-table-id rtb-036fc591be8d9c9bb \
+ --route-table-id rtb-XXXXXX \
  --destination-cidr-block 0.0.0.0/0 \
- --gateway-id igw-010626bacb140e507
+ --gateway-id igw-XXXXXXXXXXXX
 
 ```
 
