@@ -62,8 +62,33 @@ aws ec2 create-subnet \
  --availability-zone --xx-xxxx-xxx
 ```
 
+セキュリティグループ
+```
+#セキュリティグループ作成
+aws ec2 create-security-group \
+ --group-name test-sg \
+ --vpc-id vpc-XXXXXXXXXXXX \
+ --description "security group"
+
+# セキュリティグループ(編集)
+aws ec2 authorize-security-group-ingress \
+ --group-id sg-XXXXXXXXX \
+ --protocol tcp \
+ --port 80 (Port番号)\
+ --cidr XXX.XXX.XXX.XXX/32
+```
 
 ### EC2 頻出コマンド
+
+ec2作成
+```
+aws ec2 run-instances \
+ --image-id ami-xxxxx \
+ --security-group-ids sg-xxxxxx \
+ --subnet-id subnet-xxxxxxx \
+ --instance-type t2.micro \
+ --key-name test-key \
+```
 
 ec2起動・停止
 ```
