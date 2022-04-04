@@ -21,6 +21,48 @@ chokidarを使い、dataディレクトリに変更があった時にconsole.log
 - aws/aws_lambda.py lambdaでのメール転送処理
 - aws/aws_python.py pythonでのs3処理
 
+### ネットワーク絡み
+
+一番外側のネットワーク
+```
+aws ec2 create-vpc \
+ --cidr-block 10.0.0.0/16
+#成功時VPCの情報が帰ってくる
+
+#タグはVPC作成後(vpc以外も当然できる)
+aws ec2 create-tags --resources vpc-XXXXXXXXXXX \
+--tags Key=Name,Value=total_out_VPC
+```
+
+インターネットゲートウェイ
+```
+#インターネットゲートウェイ
+aws ec2 create-internet-gateway
+
+ #VPCの紐付け
+aws ec2 attach-internet-gateway \
+ --internet-gateway-id igw-xxxxxxxx \
+ --vpc-id vpc-xxxxxxxx
+```
+
+ルートテーブルの編集(VPC作成時に自動的に作られるので、編集)
+```
+aws ec2 create-route \
+ --route-table-id rtb-036fc591be8d9c9bb \
+ --destination-cidr-block 0.0.0.0/0 \
+ --gateway-id igw-010626bacb140e507
+
+```
+
+サブネットの作成(ロードバランサーを前提に２つ作成し、availibility zoneを設定した方が良い)
+```
+aws ec2 create-subnet \
+ --vpc-id vpc-XXXXX \
+ --cidr-block XX.X.X.X/24 \
+ --availability-zone --xx-xxxx-xxx
+```
+
+
 ### EC2 頻出コマンド
 
 ec2起動・停止
