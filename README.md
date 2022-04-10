@@ -24,6 +24,18 @@ chokidarを使い、dataディレクトリに変更があった時にconsole.log
 ### localstack
 awsをローカル上で使用できる仮想環境
 
+s3での説明
+```
+#バケット作成
+aws s3 mb s3://sample --endpoint-url=http://localhost:4566 --profile localstack
+
+#バケット一覧
+aws s3 ls s3://sample/ --endpoint-url=http://localhost:4566 --profile localstack
+
+#バケット一覧
+aws s3 cp aaaa.txt s3://sample/aaaa.txt --endpoint-url=http://localhost:4566 --profile localstack
+
+```
 
 
 ### ネットワーク絡み
