@@ -21,6 +21,11 @@ chokidarを使い、dataディレクトリに変更があった時にconsole.log
 - aws/aws_lambda.py lambdaでのメール転送処理
 - aws/aws_python.py pythonでのs3処理
 
+### localstack
+awsをローカル上で使用できる仮想環境
+
+
+
 ### ネットワーク絡み
 
 一番外側のネットワーク
