@@ -10,7 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "firebase-admin": "^7.1.0",
+    "firebase-admin": "^11.4.1",
     "node-env-file": "^0.1.8"
   }
 }
